@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from "react";
 const Memos = ({ state }) => {
   const [memos, setMemos] = useState([]);

@@ -1,5 +1,3 @@
-
-
 import { ethers } from "ethers";
 const Buy = ({ state }) => {
   const buyChai = async (event) => {
