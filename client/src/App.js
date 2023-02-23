@@ -2,7 +2,7 @@ import abi from "./contracts/demo.json"
 import {useState,useEffect} from 'react';
 import {ethers, Signer} from 'ethers';
 import Buy from "./components/Buy";
-import memos from "./components/memo";
+import Memos from "./components/Memos";
 import './App.css';
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
 
     <div className="App">
     <Buy state={state}> </Buy>
+    <Memos state={state}></Memos>
      
     </div>
   );
