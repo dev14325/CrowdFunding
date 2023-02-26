@@ -3,6 +3,9 @@ import {useState,useEffect} from 'react';
 import {ethers, Signer} from 'ethers';
 import Buy from "./components/Buy";
 import Memos from "./components/Memos";
+// import cofee from "./cofee.png";
+// import Image from 'react-image-resizer';
+
 import './App.css';
 
 function App() {
@@ -11,7 +14,8 @@ function App() {
     signer : null,
     contract :  null,
 
-  })
+  });
+  const [account, setAccount] = useState("None");
   useEffect(()=>{
     const connectWallet = async()=>{
       const contractAddress = "0x2BA7675698bfa41e987d16f27eB05F05DCAc41A0";
@@ -22,11 +26,21 @@ function App() {
         if(ethereum){
           const account = await ethereum.request({method : "eth_requestAccounts"})
         }
+        window.ethereum.on("chainChanged", () => {
+          window.location.reload();
+        });
+
+        window.ethereum.on("accountsChanged", () => {
+          window.location.reload();
+        });
+
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const contract = new ethers.Contract(contractAddress,contractAbi,signer);
+        setAccount(account);
        setState({provider,signer,contract});
       }
+      
       catch{
         console.error();
       }
@@ -38,12 +52,22 @@ function App() {
   },[]);
   console.log(state);
   return (
+    // <div style={{ backgroundColor: "#EFEFEF", height: "10%" , width:"100%"}}>
+    //   <img src={cofee} className="img-fluid" alt=".." width="50%"  />
+    //   <p>
+    //     class="text-muted lead "
+    //     style={{ marginTop: "10px",marginLeft: "5px"}}
+      
+    //     <small>Connected Account - {account}</small>
+    //   </p>
 
-    <div className="App">
+    // <div className="container">
+    <div>
     <Buy state={state}> </Buy>
     <Memos state={state}></Memos>
-     
     </div>
+    //  </div>
+    // </div>
   );
 }
 
