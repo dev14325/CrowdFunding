@@ -25,7 +25,7 @@ function App() {
         const {ethereum} = window;
         if(ethereum){
           const account = await ethereum.request({method : "eth_requestAccounts"})
-        }
+        
         window.ethereum.on("chainChanged", () => {
           window.location.reload();
         });
@@ -40,6 +40,11 @@ function App() {
         setAccount(account);
        setState({provider,signer,contract});
       }
+      else{
+        alert("Metamask not installed");
+      }
+    }
+   
       
       catch{
         console.error();
@@ -52,19 +57,22 @@ function App() {
   },[]);
   console.log(state);
   return (
-    // <div style={{ backgroundColor: "#EFEFEF", height: "10%" , width:"100%"}}>
-    //   <img src={cofee} className="img-fluid" alt=".." width="50%"  />
-    //   <p>
-    //     class="text-muted lead "
-    //     style={{ marginTop: "10px",marginLeft: "5px"}}
-      
-    //     <small>Connected Account - {account}</small>
-    //   </p>
+    <div style={{ backgroundColor: "#EFEFEF", height: "10%" , width:"100%"}}>
+   
+     
+        {/* <small>Connected Account - {account}</small> */}
+   
 
-    // <div className="container">
+   
     <div>
+    
+    <p>Connected Account -{account}</p>
     <Buy state={state}> </Buy>
+   
+   
+   
     <Memos state={state}></Memos>
+  
     </div>
     //  </div>
     // </div>
