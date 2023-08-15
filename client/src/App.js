@@ -3,6 +3,7 @@ import {useState,useEffect} from 'react';
 import {ethers, Signer} from 'ethers';
 import Buy from "./components/Buy";
 import Memos from "./components/Memos";
+import temp from './temp.png';
 // import cofee from "./cofee.png";
 // import Image from 'react-image-resizer';
 
@@ -57,25 +58,29 @@ function App() {
   },[]);
   console.log(state);
   return (
-    <div style={{ backgroundColor: "#EFEFEF", height: "10%" , width:"100%"}}>
-   
-     
-        {/* <small>Connected Account - {account}</small> */}
+    <div style={{ backgroundColor: "#EFEFEF", height: "1%" , width:"100%"}}>
+     <img src = {temp} className="img-fluid" width= "50%"
+      style={{ display: 'block', margin: '0 auto' }} />
+    
+    <p style={{ textAlign: 'center' }}>
+  <b>Connected Account - {account}</b>
+</p>      
    
 
    
-    <div>
+    <div className="container">
     
-    <p>Connected Account -{account}</p>
+   
     <Buy state={state}> </Buy>
    
    
    
     <Memos state={state}></Memos>
+    
   
     </div>
-    //  </div>
-    // </div>
+  
+     </div>
   );
 }
 
