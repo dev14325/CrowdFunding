@@ -1,84 +1,39 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+
 const Memos = ({ state }) => {
   const [memos, setMemos] = useState([]);
   const { contract } = state;
 
   useEffect(() => {
-    const memosMessage = async () => {
+    const fetchMemos = async () => {
       const memos = await contract.getMemos();
       setMemos(memos);
     };
-    contract && memosMessage();
+
+    contract && fetchMemos();
   }, [contract]);
 
   return (
     <>
-      <p style={{ textAlign: "center", marginTop: "20px" }}>Messages</p>
-      {memos.map((memo) => {
-        return (
-          <div
-            className="container-fluid"
-            style={{ width: "100%" }}
-            key={Math.random()}
-          >
-            <table
-              style={{
-                marginBottom: "10px",
-              }}
-            >
-              <tbody>
-                <tr>
-                  <td
-                    style={{
-                      backgroundColor: "#96D4D4",
-                      border: "1px solid white",
-                      borderCollapse: "collapse",
-                      padding: "7px",
-                      width: "100px",
-                    }}
-                  >
-                    {memo.name}
-                  </td>
-                  <td
-                    style={{
-                      backgroundColor: "#96D4D4",
-                      border: "1px solid white",
-                      borderCollapse: "collapse",
-                      padding: "7px",
-                      width: "800px",
-                    }}
-                  >
-                    {new Date(memo.timestamp * 1000).toLocaleString()}
-                  </td>
-                  <td
-                    style={{
-                      backgroundColor: "#96D4D4",
-                      border: "1px solid white",
-                      borderCollapse: "collapse",
-                      padding: "7px",
-                      width: "300px",
-                    }}
-                  >
-                    {memo.message}
-                  </td>
-                  <td
-                    style={{
-                      backgroundColor: "#96D4D4",
-                      border: "1px solid white",
-                      borderCollapse: "collapse",
-                      padding: "7px",
-                      width: "400px",
-                    }}
-                  >
-                    {memo.from}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        );
-      })}
+      <h3> Messages</h3>
+      <p style={{ textAlign: "center", marginTop: "20px" }}> 
+    
+      </p>
+      {memos.map((memo) => (
+        <div key={memo.timestamp}>
+          <p>{`Name: ${memo.name}`}</p>
+          <p>{`Timestamp: ${new Date(memo.timestamp * 1000).toLocaleString()}`}</p>
+          <p>{`Message: ${memo.message}`}</p>
+          <p>{`From: ${memo.from}`}</p>
+          {memo.amount !== undefined && (
+            <p>{`Amount: ${ethers.utils.formatUnits(memo.amount, "ether")} Eth`}</p>
+          )}
+          <hr />
+        </div>
+      ))}
     </>
   );
 };
+
 export default Memos;

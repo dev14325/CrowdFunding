@@ -38,3 +38,9 @@
     transform: rotate(360deg);
   }
 }
+
+.dark-mode-body {
+  background-color: #000000; /* Black background */
+  color: #ffffff; /* White text */
+  /* Add other styles for dark mode */
+}

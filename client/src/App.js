@@ -1,11 +1,11 @@
-import abi from "./contracts/demo.json"
+import abi from "./contracts/crowdFunding.sol/demo.json"
 import {useState,useEffect} from 'react';
 import {ethers, Signer} from 'ethers';
 import Buy from "./components/Buy";
 import Memos from "./components/Memos";
+import TotalDonation from "./components/TotalDonation";
 import temp from './temp.png';
-// import cofee from "./cofee.png";
-// import Image from 'react-image-resizer';
+// import DarkMode from "./components/Darkmode";
 
 import './App.css';
 
@@ -19,7 +19,7 @@ function App() {
   const [account, setAccount] = useState("None");
   useEffect(()=>{
     const connectWallet = async()=>{
-      const contractAddress = "0x2BA7675698bfa41e987d16f27eB05F05DCAc41A0";
+      const contractAddress = "0xA1bb4e0B7CFDfa668898bE3Cf52fDb8775eFF1E7";
       const contractAbi = abi.abi;
 
       try{
@@ -61,6 +61,8 @@ function App() {
     <div style={{ backgroundColor: "#EFEFEF", height: "1%" , width:"100%"}}>
      <img src = {temp} className="img-fluid" width= "50%"
       style={{ display: 'block', margin: '0 auto' }} />
+
+    
     
     <p style={{ textAlign: 'center' }}>
   <b>Connected Account - {account}</b>
@@ -69,6 +71,7 @@ function App() {
 
    
     <div className="container">
+     
     
    
     <Buy state={state}> </Buy>
@@ -76,6 +79,8 @@ function App() {
    
    
     <Memos state={state}></Memos>
+
+    <TotalDonation state={state}></TotalDonation> 
     
   
     </div>
